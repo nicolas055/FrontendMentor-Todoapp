@@ -39,7 +39,7 @@ function newTodo() {
         checkTodoEl.addEventListener('click', () => {
             newTodo.classList.toggle('completed');
             completedTodo = allTodo.filter(todo => todo.classList.contains('completed'))
-            activeTodo = activeTodo.filter(todo => !todo.classList.contains('completed'));
+            activeTodo = allTodo.filter(todo => !todo.classList.contains('completed'));
             update();
         })
     }
