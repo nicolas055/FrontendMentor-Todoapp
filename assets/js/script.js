@@ -77,7 +77,16 @@ function update() {
     todoList.innerHTML = '';
     filter();
     addToLocalStorage();
+    todoListMaxItem(7);
     itemCounter.innerHTML = `${activeTodo.length} items left`;  // Update the items left counter
+}
+
+function todoListMaxItem(lineNumber) {
+    if(todoList.childElementCount > lineNumber) {
+        todoList.style.overflowY = 'scroll';
+    } else {
+        todoList.style.overflowY = 'auto';
+    }
 }
 
 function filter() {
