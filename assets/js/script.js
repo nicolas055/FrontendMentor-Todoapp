@@ -77,13 +77,20 @@ function update() {
     todoList.innerHTML = '';
     filter();
     addToLocalStorage();
-    todoListMaxItem(7);
+    todoListMaxLines(5);
     itemCounter.innerHTML = `${activeTodo.length} items left`;  // Update the items left counter
 }
 
-function todoListMaxItem(lineNumber) {
+function todoListMaxLines(lineNumber) {
+    if (todoList.childElementCount >= lineNumber) {
+        todoList.style.maxHeight = todoList.offsetHeight + 'px';
+    } else {
+        todoList.style.maxHeight = 'auto';
+    }
+
     if(todoList.childElementCount > lineNumber) {
         todoList.style.overflowY = 'scroll';
+        
     } else {
         todoList.style.overflowY = 'auto';
     }
