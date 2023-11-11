@@ -1,0 +1,217 @@
+/* ---Variables--- */
+:root {
+    /* --Colors-- */
+    --bright-blue: hsl(220, 98%, 61%);
+    --check-Background: linear-gradient(145deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+
+body.dark-theme {
+    --document-bg-clr: hsl(235, 21%, 11%);
+    --card-bg-clr: hsl(235, 24%, 19%);
+    --todo-txt-clr: hsl(234, 39%, 85%);
+    --todo-txt-clr-hvr: hsl(236, 33%, 92%);
+    --header-clr: #fff;
+    --circle-border-clr: #33354a;
+    --todo-completed-txt-clr: hsl(233, 14%, 35%);
+    --circle-border-clr-hvr: hsl(234, 11%, 52%);
+    --txt-cursor-clr: #5e76b6;
+    --todo-plchldr: hsl(234, 11%, 52%);
+    --todo-separate-lines: hsl(237, 14%, 26%);
+    --card-footer-txt-clr: hsl(233, 14%, 35%);
+    --filter-txt-clr-hrv: hsl(236, 33%, 92%);
+    --clear-completed-clr-hrv: hsl(236, 33%, 92%);
+}
+/* Resets */
+/* Reset Buttons */
+button {
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../images/bg-desktop-dark.jpg');
+    background-repeat: no-repeat;
+    background-color: var(--document-bg-clr);
+    height: 100vh;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.card {
+    width: 500px;
+}
+
+
+/* ---Header--- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    color: var(--header-clr);
+
+}
+
+h1 {
+    line-height: normal;
+    letter-spacing: 10px;
+    font-size: 3rem;
+}
+
+.toggle-theme {
+    margin-top: 3px;
+}
+
+/* ---Main--- */
+main {
+    width: inherit;
+    --main-h-padding: 20px
+}
+
+input[type="text"] {
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    flex: 1;
+    caret-color: var(--txt-cursor-clr);
+    font-size: 1.2rem;
+    padding: 0;
+    color: var(--todo-txt-clr);
+    line-height: normal;
+    padding: 20px 0;
+}
+
+input[type="text"]::placeholder {
+    color: var(--todo-plchldr);
+}
+
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: 1px solid var(--circle-border-clr);
+    transition: border-color 150ms;
+}
+
+.circle img {
+    display: none;
+}
+
+.insert--todo-item.todo-item {
+    margin-bottom: 30px;
+    box-shadow: 0 30px 30px rgba(0, 0, 0, 0.363);
+    border-radius: 3px;
+    border: 0;
+}
+
+#todo-list {
+    max-height: 420px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: var(--card-bg-clr);
+    padding: 0 var(--main-h-padding);
+    border-bottom: 1px solid var(--todo-separate-lines);
+    cursor: pointer;
+}
+
+.todo-item:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#todo-list .todo-item input[type="text"] {
+    cursor: pointer;
+}
+
+#todo-list .todo-item:hover input[type="text"] {
+    color: var(--todo-txt-clr-hvr);
+}
+
+.todo-item:hover .circle {
+    border-color: var(--circle-border-clr-hvr);
+}
+
+.todo-item:hover .delete-todo {
+    opacity: 1;
+}
+
+.delete-todo {
+    opacity: 0;
+    transition: opacity 200ms;
+}
+
+/* Todo item completed */
+.todo-item.completed .circle {
+    background: var(--check-Background);
+}
+
+.todo-item.completed .circle img {
+    display: block;
+}
+
+#todo-list .todo-item.completed input[type="text"] {
+    color: var(--todo-completed-txt-clr);
+    text-decoration: line-through;
+}
+
+/* ---Card Footer--- */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--card-bg-clr);
+    color: var(--card-footer-txt-clr);
+    padding: 17px var(--main-h-padding);
+    font-size: 0.85rem;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    line-height: normal;
+}
+
+#filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#filter label {
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--card-footer-txt-clr);
+    transition: color 200ms;
+}
+
+#filter label:hover {
+    color: var(--filter-txt-clr-hrv);
+}
+
+#filter label.active {
+    color: var(--bright-blue);
+}
+
+#filter input[type="radio"] {
+    appearance: none;
+}
+
+#clear-completed {
+    color: var(--card-footer-txt-clr);
+    transition: color 200ms;
+}
+
+#clear-completed:hover {
+    color: var(--clear-completed-clr-hrv);
+}
+

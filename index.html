@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+   <title>Frontend Mentor | Todo app</title>
+
+   <!-- CSS -->
+   <link rel="stylesheet" type="text/css" href="assets/css/reset.css"/> <!-- Reset -->
+   <link rel="stylesheet" type="text/css" href="assets/css/style.css"/> <!-- Main -->
+
+   <!-- Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+   <div class="card">
+      <header>
+         <h1>TODO</h1>
+         <button class="toggle-theme">
+            <img src="assets/images/icon-sun.svg" alt="icon sun"/>
+         </button>
+      </header>
+      <main>
+         <div class="insert--todo-item todo-item">
+            <button class="circle"></button>
+            <input type="text" id="new-todo" class="todo-title" placeholder="Create a new todo..."/>
+         </div>
+         <ul id="todo-list">
+           <!--  <li class="todo-item">
+               <button class="circle check-todo">
+                  <img src="assets/images/icon-check.svg" alt="check-icon"/>
+               </button>
+               <input type="text" class="todo-title" disabled/>
+               <button class="delete-todo">
+                  <img src="assets/images/icon-cross.svg" alt="X icon">
+               </button>
+            </li>
+            <li class="todo-item">
+               <button class="circle check-todo">
+                  <img src="assets/images/icon-check.svg" alt="check-icon"/>
+               </button>
+               <input type="text" class="todo-title" disabled/>
+               <button class="delete-todo">
+                  <img src="assets/images/icon-cross.svg" alt="X icon">
+               </button>
+            </li>
+            <li class="todo-item">
+               <button class="circle check-todo">
+                  <img src="assets/images/icon-check.svg" alt="check-icon"/>
+               </button>
+               <input type="text" class="todo-title" disabled/>
+               <button class="delete-todo">
+                  <img src="assets/images/icon-cross.svg" alt="X icon">
+               </button>
+            </li> -->
+         </ul>
+         <div class="card-footer">
+            <div id="item-counter">0 items left</div>
+            <div id="filter">
+               <label id="filter-all" for="input-all">All</label>
+               <input id="input-all" type="radio" name="filter" checked/>
+               <label id="filter-active" for="input-active">Active</label>
+               <input id="input-active" type="radio" name="filter"/>
+               <label id="filter-completed" for="input-completed">Completed</label>
+               <input id="input-completed" type="radio" name="filter"/>
+            </div>
+            <button id="clear-completed">Clear Completed</button>
+         </div>
+      </main>
+   </div>
+
+   <!-- JS -->
+   <script src="assets/js/script.js"></script>
+</body>
+</html>
