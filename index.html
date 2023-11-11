@@ -3,6 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+   <meta name="color-scheme" content="dark light"/>
    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
    <title>Frontend Mentor | Todo app</title>
 
@@ -19,9 +20,14 @@
    <div class="card">
       <header>
          <h1>TODO</h1>
-         <button class="toggle-theme">
-            <img src="assets/images/icon-sun.svg" alt="icon sun"/>
-         </button>
+         <div id="toggle-theme" title="Change theme">
+            <button id="toggle--dark-theme">
+               <img src="assets/images/icon-sun.svg" alt="sun icon"/>
+            </button>
+            <button id="toggle--light-theme">
+               <img src="assets/images/icon-moon.svg" alt="moon icon "/>
+            </button>
+         </div>
       </header>
       <main>
          <div class="insert--todo-item todo-item">
@@ -73,6 +79,7 @@
    </div>
 
    <!-- JS -->
+   <script src="assets/js/change-theme.js"></script>
    <script src="assets/js/script.js"></script>
 </body>
 </html>

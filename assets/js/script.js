@@ -101,6 +101,7 @@ function update() {
     itemCounter.innerHTML = `${activeTodo.length} items left`;  // Update the items left counter
 }
 
+// Set the number of todos that will displayed on screen
 function todoListMaxLines(lineNumber) {
     if (todoList.childElementCount >= lineNumber) {
         todoList.style.maxHeight = todoList.offsetHeight + 'px';
@@ -134,6 +135,7 @@ function filter() {
         labelFilterAll.classList.remove('active');
     }
 }
+
 function addToLocalStorage() {
     allTodoInnerHTML = [];
     allTodoClasses = [];
@@ -145,12 +147,12 @@ function addToLocalStorage() {
     localStorage.setItem('classes', JSON.stringify(allTodoClasses));
 }
 
-// EventListeners
+/* EventListeners */
 insertTodo.addEventListener('keyup', (e) => {
     addTodo(e);
 })
 clearCompleted.addEventListener('click', removeCompletedTodos);
-
+// Add event listeners to the filter options
 for (let i = 0; i < filterLabels.length; i++) {
     filterLabels[i].addEventListener('click', () => setTimeout(update, '10'))
 }

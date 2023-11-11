@@ -3,6 +3,11 @@
     /* --Colors-- */
     --bright-blue: hsl(220, 98%, 61%);
     --check-Background: linear-gradient(145deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+
+    --circle-border-clr-hvr: hsl(234, 11%, 52%);
+    --header-clr: #fff;
+    --txt-cursor-clr: #5e76b6;
+    --todo-plchldr-clr: hsl(234, 11%, 52%);
 }
 
 body.dark-theme {
@@ -10,16 +15,27 @@ body.dark-theme {
     --card-bg-clr: hsl(235, 24%, 19%);
     --todo-txt-clr: hsl(234, 39%, 85%);
     --todo-txt-clr-hvr: hsl(236, 33%, 92%);
-    --header-clr: #fff;
     --circle-border-clr: #33354a;
     --todo-completed-txt-clr: hsl(233, 14%, 35%);
-    --circle-border-clr-hvr: hsl(234, 11%, 52%);
-    --txt-cursor-clr: #5e76b6;
-    --todo-plchldr: hsl(234, 11%, 52%);
-    --todo-separate-lines: hsl(237, 14%, 26%);
+    --todo-separate-lines-clr: hsl(237, 14%, 26%);
     --card-footer-txt-clr: hsl(233, 14%, 35%);
     --filter-txt-clr-hrv: hsl(236, 33%, 92%);
     --clear-completed-clr-hrv: hsl(236, 33%, 92%);
+}
+
+body.light-theme {
+    --document-bg-clr: hsl(235, 43%, 95%);
+    --card-bg-clr: hsl(0, 0%, 98%);
+    --todo-txt-clr: hsl(235, 19%, 35%);
+    --todo-txt-clr-hvr: hsl(235, 19%, 35%);
+    --circle-border-clr: hsl(233, 11%, 84%);
+    --todo-completed-txt-clr: hsl(233, 11%, 84%);
+    --card-footer-txt-clr: hsl(236, 9%, 61%);
+    --filter-txt-clr-hrv: hsl(233, 14%, 35%);
+    --clear-completed-clr-hrv: hsl(233, 14%, 35%);
+    --todo-separate-lines-clr: #e6e5ea;
+    
+
 }
 /* Resets */
 /* Reset Buttons */
@@ -35,11 +51,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../images/bg-desktop-dark.jpg');
     background-repeat: no-repeat;
     background-color: var(--document-bg-clr);
     height: 100vh;
     font-family: 'Josefin Sans', sans-serif;
+}
+
+body.dark-theme {
+    background-image: url('../images/bg-desktop-dark.jpg');
+}
+
+
+body.light-theme {
+    background-image: url('../images/bg-desktop-light.jpg');
 }
 
 .card {
@@ -63,8 +87,34 @@ h1 {
     font-size: 3rem;
 }
 
-.toggle-theme {
+#toggle-theme {
     margin-top: 3px;
+    position: relative;   
+    width: 26px;
+    height: 26px;
+}
+
+#toggle-theme button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 500ms;
+}
+
+body.dark-theme #toggle--dark-theme {
+    opacity: 1;
+}
+
+body.dark-theme #toggle--light-theme {
+    opacity: 0;
+}
+
+body.light-theme #toggle--light-theme {
+    opacity: 1;
+}
+
+body.light-theme #toggle--dark-theme {
+    opacity: 0;
 }
 
 /* ---Main--- */
@@ -87,7 +137,7 @@ input[type="text"] {
 }
 
 input[type="text"]::placeholder {
-    color: var(--todo-plchldr);
+    color: var(--todo-plchldr-clr);
 }
 
 .circle {
@@ -108,9 +158,12 @@ input[type="text"]::placeholder {
 
 .insert--todo-item.todo-item {
     margin-bottom: 30px;
-    box-shadow: 0 30px 30px rgba(0, 0, 0, 0.363);
     border-radius: 3px;
     border: 0;
+}
+
+body.dark-theme .insert--todo-item.todo-item {
+    box-shadow: 0 30px 30px rgba(0, 0, 0, 0.363);
 }
 
 #todo-list {
@@ -123,7 +176,7 @@ input[type="text"]::placeholder {
     width: 100%;
     background-color: var(--card-bg-clr);
     padding: 0 var(--main-h-padding);
-    border-bottom: 1px solid var(--todo-separate-lines);
+    border-bottom: 1px solid var(--todo-separate-lines-clr);
     cursor: pointer;
 }
 
