@@ -18,28 +18,41 @@ const completeTodo = document.querySelectorAll('.check-todo');
 let allTodo = [];
 let activeTodo = [];
 let completedTodo = [];
+let allTodoInnerHTML = [];
+let allTodoClasses = [];
+
+// Get data from localStorage
+if (localStorage.getItem('all') !== null && localStorage.getItem('classes') !== null) {
+    let localStorageAllTodo = JSON.parse(localStorage.getItem('all'))
+    let localStorageClasses = JSON.parse(localStorage.getItem('classes'))
+    for (let i = 0; i < localStorageAllTodo.length; i++) {
+        newTodo(localStorageAllTodo[i], Object.values(localStorageClasses[i]).join(' '));
+    }
+    filterTodo();
+    update();
+}
+
+
+
 
 // Functions
-function newTodo() {
+function filterTodo() {
+    completedTodo = allTodo.filter(todo => todo.classList.contains('completed'))
+    activeTodo = allTodo.filter(todo => !todo.classList.contains('completed'));
+}
+
+function newTodo(newTodoInnerHtml, addClass) {
     let newTodo;
     function createTodo () {
         newTodo = document.createElement('li')
-        newTodo.classList.add('todo-item');
-        newTodo.innerHTML = `
-        <button class="circle check-todo">
-            <img src="assets/images/icon-check.svg" alt="check-icon"/>
-        </button>
-        <input type="text" class="todo-title" value="${insertTodo.value}" disabled/>
-        <button class="delete-todo">
-            <img src="assets/images/icon-cross.svg" alt="X icon">
-        </button>`
+        newTodo.setAttribute('class', addClass);
+        newTodo.innerHTML = newTodoInnerHtml;
     }
     function checkTodo() {
         let checkTodoEl = newTodo.querySelector('.check-todo');
         checkTodoEl.addEventListener('click', () => {
             newTodo.classList.toggle('completed');
-            completedTodo = allTodo.filter(todo => todo.classList.contains('completed'))
-            activeTodo = allTodo.filter(todo => !todo.classList.contains('completed'));
+            filterTodo()
             update();
         })
     }
@@ -47,8 +60,7 @@ function newTodo() {
         let removeTodoEl = newTodo.querySelector('.delete-todo');
         removeTodoEl.addEventListener('click', () => {
             allTodo.splice(allTodo.indexOf(newTodo), 1);
-            activeTodo = allTodo.filter(todo => !todo.classList.contains('completed'))
-            completedTodo = allTodo.filter(todo => todo.classList.contains('completed'))
+            filterTodo()
             update();
         })
     }
@@ -67,7 +79,15 @@ function removeCompletedTodos() {
 
 function addTodo(e) {
     if(e.key === 'Enter' && insertTodo.value !== '') {
-        newTodo();
+        newTodo(`
+        <button class="circle check-todo">
+            <img src="assets/images/icon-check.svg" alt="check-icon"/>
+        </button>
+        <input type="text" class="todo-title" value="${insertTodo.value}" disabled/>
+        <button class="delete-todo">
+            <img src="assets/images/icon-cross.svg" alt="X icon">
+        </button>
+        `, 'todo-item');
         update();
         insertTodo.value = ''; // Empty the insertTodo Value
     }
@@ -77,7 +97,7 @@ function update() {
     todoList.innerHTML = '';
     filter();
     addToLocalStorage();
-    todoListMaxLines(5);
+    todoListMaxLines(6);
     itemCounter.innerHTML = `${activeTodo.length} items left`;  // Update the items left counter
 }
 
@@ -114,24 +134,15 @@ function filter() {
         labelFilterAll.classList.remove('active');
     }
 }
-
-let allTodoInnerHTML = []
-let newInner = [];
 function addToLocalStorage() {
     allTodoInnerHTML = [];
-    newInner = [];
+    allTodoClasses = [];
     allTodo.forEach((todo) => {
         allTodoInnerHTML.push(todo.innerHTML);
-    })
-    allTodoInnerHTML.forEach((item) => {
-        let newTodo = document.createElement('li');
-        newTodo.classList.add('todo-item');
-        newTodo.innerHTML = item;
-        newInner.push(newTodo);
+        allTodoClasses.push(todo.classList);
     })
     localStorage.setItem('all', JSON.stringify(allTodoInnerHTML));
-    localStorage.setItem('active', JSON.stringify(activeTodo));
-    localStorage.setItem('completed', JSON.stringify(completedTodo));
+    localStorage.setItem('classes', JSON.stringify(allTodoClasses));
 }
 
 // EventListeners
