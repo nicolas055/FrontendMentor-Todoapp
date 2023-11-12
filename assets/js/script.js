@@ -80,9 +80,11 @@ function removeCompletedTodos() {
 function addTodo(e) {
     if(e.key === 'Enter' && insertTodo.value !== '') {
         newTodo(`
-        <button class="circle check-todo">
-            <img src="assets/images/icon-check.svg" alt="check-icon"/>
-        </button>
+        <div class="check-todo">
+            <button class="circle">
+                <img src="assets/images/icon-check.svg" alt="check-icon"/>
+            </button>
+        </div>
         <input type="text" class="todo-title" value="${insertTodo.value}" disabled/>
         <button class="delete-todo">
             <img src="assets/images/icon-cross.svg" alt="X icon">
@@ -97,24 +99,32 @@ function update() {
     todoList.innerHTML = '';
     filter();
     addToLocalStorage();
-    todoListMaxLines(6);
+    todoListMaxLines(6, 3);
     itemCounter.innerHTML = `${activeTodo.length} items left`;  // Update the items left counter
 }
 
 // Set the number of todos that will displayed on screen
-function todoListMaxLines(lineNumber) {
-    if (todoList.childElementCount >= lineNumber) {
-        todoList.style.maxHeight = todoList.offsetHeight + 'px';
-    } else {
-        todoList.style.maxHeight = 'auto';
+function todoListMaxLines(lineNumberDesktop, lineNumberMobile) {
+    function maxLines(lineNumber) {
+        if (todoList.childElementCount >= lineNumber) {
+            todoList.style.maxHeight = lineNumber * todoList.children[0].offsetHeight + 'px';
+        } else {
+            todoList.style.maxHeight = 'auto';
+        }
+    
+        if(todoList.childElementCount > lineNumber) {
+            todoList.style.overflowY = 'scroll';
+            
+        } else {
+            todoList.style.overflowY = 'auto';
+        }
+    }
+    if(body.offsetHeight >= 600) {
+        maxLines(lineNumberDesktop);
+    } else if (body.offsetHeight < 600) {
+        maxLines(lineNumberMobile);
     }
 
-    if(todoList.childElementCount > lineNumber) {
-        todoList.style.overflowY = 'scroll';
-        
-    } else {
-        todoList.style.overflowY = 'auto';
-    }
 }
 
 function filter() {
