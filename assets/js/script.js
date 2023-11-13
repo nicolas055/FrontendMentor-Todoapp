@@ -111,13 +111,6 @@ function todoListMaxLines(lineNumberDesktop, lineNumberMobile) {
         } else {
             todoList.style.maxHeight = 'auto';
         }
-    
-        if(todoList.childElementCount > lineNumber) {
-            todoList.style.overflowY = 'scroll';
-            
-        } else {
-            todoList.style.overflowY = 'auto';
-        }
     }
     if(body.offsetHeight >= 600) {
         maxLines(lineNumberDesktop);
