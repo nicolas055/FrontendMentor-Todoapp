@@ -38,8 +38,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Go to solution](https://www.frontendmentor.io/solutions/todoapp-using-localstorage-4GX2-mBlt9)
+- Live Site URL: [Go to live site](https://frontend-mentor-todoapp.vercel.app/)
 
 ## My process
 
