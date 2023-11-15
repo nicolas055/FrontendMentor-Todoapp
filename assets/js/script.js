@@ -16,11 +16,6 @@ if (localStorage.getItem('all') !== null && localStorage.getItem('classes') !== 
     update();
 }
 
-
-
-
-
-
 // Functions
 function filterTodo() {
     completedTodo = allTodo.filter(todo => todo.classList.contains('completed'))
@@ -32,6 +27,7 @@ function newTodo(newTodoInnerHtml, addClass) {
     function createTodo () {
         newTodo = document.createElement('li')
         newTodo.setAttribute('class', addClass);
+        newTodo.setAttribute('draggable', 'true');
         newTodo.innerHTML = newTodoInnerHtml;
     }
     function checkTodo() {
@@ -77,7 +73,10 @@ function addTodo(e) {
         </button>
         `, 'todo-item');
         update();
-        insertTodo.value = ''; // Empty the insertTodo Value
+        // Empty the insertTodo Value
+        insertTodo.value = ''; 
+        // Make the scrollbar go to the bottom of the todoList
+        todoList.children[1].scrollTo(0, todoList.children[1].scrollHeight); 
     }
 }
 
