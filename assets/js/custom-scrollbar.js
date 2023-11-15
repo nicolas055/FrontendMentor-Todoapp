@@ -19,7 +19,8 @@ function showScrollBar() {
 function hideScrollBar() {
     document.querySelector('.os-scrollbar-vertical').style.opacity = '0';
 }
-
+// Default
+hideScrollBar()
 // Desktop
 todoList.addEventListener('mouseover', () => {
     showScrollBar()
