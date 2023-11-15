@@ -1,32 +1,3 @@
-var { 
-    OverlayScrollbars, 
-    ScrollbarsHidingPlugin, 
-    SizeObserverPlugin, 
-    ClickScrollPlugin  
-} = OverlayScrollbarsGlobal;
-
-const osInstance = OverlayScrollbars(document.querySelector('#todo-list'), {
-    scrollbars:  {
-        theme: 'os-theme-light'
-    }
-});
-
-// Getting elements from html
-const todoList = document.querySelector('#todo-list');
-const insertTodo = document.querySelector('#new-todo');
-const itemCounter = document.querySelector('#item-counter');
-const filterEl = document.querySelector('#filter');
-const filterLabels = filterEl.querySelectorAll('label');
-const labelFilterAll = document.querySelector('#filter-all');
-const labelFilterActive = document.querySelector('#filter-active');
-const labelFilterCompleted = document.querySelector('#filter-completed');
-const inputFilterAll = document.querySelector('#input-all');
-const inputFilterActive = document.querySelector('#input-active');
-const inputFilterCompleted = document.querySelector('#input-completed');
-const clearCompleted = document.querySelector('#clear-completed');
-const completeTodo = document.querySelectorAll('.check-todo');
-
-
 // Variables
 let allTodo = [];
 let activeTodo = [];
@@ -174,32 +145,6 @@ clearCompleted.addEventListener('click', removeCompletedTodos);
 for (let i = 0; i < filterLabels.length; i++) {
     filterLabels[i].addEventListener('click', () => setTimeout(update, '10'))
 }
-
-
-// Toggle scrollBar
-function showScrollBar() {
-    document.querySelector('.os-scrollbar-vertical').classList.add('active');
-}
-
-function hideScrollBar() {
-    document.querySelector('.os-scrollbar-vertical').classList.remove('active');
-}
-
-// Desktop
-todoList.addEventListener('mouseover', () => {
-    showScrollBar()
-})
-todoList.addEventListener('mouseout', () => {
-    hideScrollBar()
-})
-
-// Mobile
-todoList.addEventListener('touchstart', () => {
-    showScrollBar()
-})
-todoList.addEventListener('touchend', () => {
-    hideScrollBar()
-})
 
 
 

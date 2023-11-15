@@ -1,8 +1,3 @@
-// Getting elements from html
-const body = document.querySelector('body')
-const toggleTheme = document.querySelector('#toggle-theme');
-
-
 // Getting data from localStorage or prefers-color-scheme
 if (localStorage.getItem('prefered-theme') !== null) {
     body.classList.replace('dark-theme', localStorage.getItem('prefered-theme'));
