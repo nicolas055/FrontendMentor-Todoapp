@@ -1,3 +1,16 @@
+var { 
+    OverlayScrollbars, 
+    ScrollbarsHidingPlugin, 
+    SizeObserverPlugin, 
+    ClickScrollPlugin  
+} = OverlayScrollbarsGlobal;
+
+const osInstance = OverlayScrollbars(document.querySelector('#todo-list'), {
+    scrollbars:  {
+        theme: 'os-theme-light'
+    }
+});
+
 // Getting elements from html
 const todoList = document.querySelector('#todo-list');
 const insertTodo = document.querySelector('#new-todo');
@@ -31,6 +44,8 @@ if (localStorage.getItem('all') !== null && localStorage.getItem('classes') !== 
     filterTodo();
     update();
 }
+
+
 
 
 
@@ -96,7 +111,7 @@ function addTodo(e) {
 }
 
 function update() {
-    todoList.innerHTML = '';
+    todoList.children[1].innerHTML = '';
     filter();
     addToLocalStorage();
     todoListMaxLines(6, 3);
@@ -106,8 +121,8 @@ function update() {
 // Set the number of todos that will displayed on screen
 function todoListMaxLines(lineNumberDesktop, lineNumberMobile) {
     function maxLines(lineNumber) {
-        if (todoList.childElementCount >= lineNumber) {
-            todoList.style.maxHeight = lineNumber * todoList.children[0].offsetHeight + 'px';
+        if (todoList.children[1].childElementCount >= lineNumber) {
+            todoList.style.maxHeight = lineNumber * todoList.children[1].children[0].offsetHeight + 'px';
         } else {
             todoList.style.maxHeight = 'auto';
         }
@@ -122,17 +137,17 @@ function todoListMaxLines(lineNumberDesktop, lineNumberMobile) {
 
 function filter() {
     if (inputFilterAll.checked) {
-        allTodo.forEach((todo) => todoList.append(todo));
+        allTodo.forEach((todo) => todoList.children[1].append(todo));
         labelFilterAll.classList.add('active');
         labelFilterActive.classList.remove('active');
         labelFilterCompleted.classList.remove('active');
     } else if (inputFilterActive.checked) {
-        activeTodo.forEach((todo) => todoList.append(todo));
+        activeTodo.forEach((todo) => todoList.children[1].append(todo));
         labelFilterActive.classList.add('active');
         labelFilterAll.classList.remove('active');
         labelFilterCompleted.classList.remove('active');
     } else if (inputFilterCompleted.checked) {
-        completedTodo.forEach((todo) => todoList.append(todo));
+        completedTodo.forEach((todo) => todoList.children[1].append(todo));
         labelFilterCompleted.classList.add('active');
         labelFilterActive.classList.remove('active');
         labelFilterAll.classList.remove('active');
@@ -159,6 +174,34 @@ clearCompleted.addEventListener('click', removeCompletedTodos);
 for (let i = 0; i < filterLabels.length; i++) {
     filterLabels[i].addEventListener('click', () => setTimeout(update, '10'))
 }
+
+
+// Toggle scrollBar
+function showScrollBar() {
+    document.querySelector('.os-scrollbar-vertical').classList.add('active');
+}
+
+function hideScrollBar() {
+    document.querySelector('.os-scrollbar-vertical').classList.remove('active');
+}
+
+// Desktop
+todoList.addEventListener('mouseover', () => {
+    showScrollBar()
+})
+todoList.addEventListener('mouseout', () => {
+    hideScrollBar()
+})
+
+// Mobile
+todoList.addEventListener('touchstart', () => {
+    showScrollBar()
+})
+todoList.addEventListener('touchend', () => {
+    hideScrollBar()
+})
+
+
 
 
 

@@ -8,6 +8,11 @@
     --header-clr: #fff;
     --txt-cursor-clr: #5e76b6;
     --todo-plchldr-clr: hsl(234, 11%, 52%);
+    --os-size: 20px
+}
+
+.os-theme-custom {
+    --os-size: 20px
 }
 
 body.dark-theme {
@@ -173,7 +178,6 @@ body.dark-theme .insert--todo-item.todo-item {
     box-shadow: 0 30px 30px rgba(0, 0, 0, 0.363);
 }
 
-body.dark-theme #todo-list,
 body.dark-theme .card-footer {
     box-shadow: 0 30px 30px rgba(0, 0, 0, 0.363);
 }
