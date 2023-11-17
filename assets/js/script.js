@@ -59,6 +59,8 @@ function removeCompletedTodos() {
     update()
 }
 
+
+let hideScrollBarTimeout = null;
 function addTodo(e) {
     if(e.key === 'Enter' && insertTodo.value !== '') {
         newTodo(`
@@ -76,7 +78,20 @@ function addTodo(e) {
         // Empty the insertTodo Value
         insertTodo.value = ''; 
         // Make the scrollbar go to the bottom of the todoList
-        todoList.children[1].scrollTo(0, todoList.children[1].scrollHeight); 
+        todoList.children[1].scrollTo(0, todoList.children[1].scrollHeight);
+        // Show scroll for a short time when an item is added
+        showScrollBar();
+        if(hideScrollBarTimeout != null) {
+            clearTimeout(hideScrollBarTimeout);
+            hideScrollBarTimeout = null;
+        }
+        hideScrollBarTimeout = setTimeout(hideScrollBar, '1000');
+    }
+}
+
+function running() {
+    while (true) {
+        console.log('Running')
     }
 }
 
