@@ -22,12 +22,13 @@ function hideScrollBar() {
 // Default
 hideScrollBar()
 // Desktop
-todoList.addEventListener('mouseover', () => {
-    showScrollBar()
+todoList.addEventListener('mouseenter', () => {
+    showScrollBar();
 })
-todoList.addEventListener('mouseout', () => {
-    hideScrollBar()
+todoList.addEventListener('mouseleave', () => {
+    hideScrollBar();
 })
+
 
 // Mobile
 todoList.addEventListener('touchstart', () => {
@@ -35,4 +36,4 @@ todoList.addEventListener('touchstart', () => {
 })
 todoList.addEventListener('touchend', () => {
     hideScrollBar()
-})
+}) 

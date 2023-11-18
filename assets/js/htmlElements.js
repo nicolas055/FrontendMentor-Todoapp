@@ -13,3 +13,5 @@ const inputFilterActive = document.querySelector('#input-active');
 const inputFilterCompleted = document.querySelector('#input-completed');
 const clearCompleted = document.querySelector('#clear-completed');
 const completeTodo = document.querySelectorAll('.check-todo');
+
+

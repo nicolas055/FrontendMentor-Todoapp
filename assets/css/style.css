@@ -185,6 +185,9 @@ body.dark-theme .card-footer {
 #todo-list {
     max-height: 420px;
     overflow-y: auto;
+    background-color: var(--card-bg-clr);
+    border-top-right-radius: var(--card-border-radius);
+    border-top-left-radius: var(--card-border-radius);
 }
 
 .todo-item {
@@ -281,6 +284,10 @@ body.dark-theme .card-footer {
     transition: color 200ms;
     padding-right: var(--main-x-padding);
     grid-area: clear-completed;
+}
+
+.todo-item.dragging {
+    opacity: 0.1;
 }
 
 /* Hover States */

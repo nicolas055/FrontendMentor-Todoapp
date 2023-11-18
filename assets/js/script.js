@@ -22,19 +22,26 @@ function filterTodo() {
     activeTodo = allTodo.filter(todo => !todo.classList.contains('completed'));
 }
 
-function newTodo(newTodoInnerHtml, addClass) {
+function newTodo(innerHtml, addClass) {
     let newTodo;
     function createTodo () {
-        newTodo = document.createElement('li')
+        newTodo = document.createElement('li');
         newTodo.setAttribute('class', addClass);
         newTodo.setAttribute('draggable', 'true');
-        newTodo.innerHTML = newTodoInnerHtml;
+        newTodo.innerHTML = innerHtml;
+        // Add drag property to the newTodo
+        newTodo.addEventListener('dragstart', () => {
+            setTimeout(() => newTodo.classList.add('dragging'), 0)
+        });
+        newTodo.addEventListener('dragend', () => {
+            newTodo.classList.remove('dragging');
+        });
     }
     function checkTodo() {
         let checkTodoEl = newTodo.querySelector('.check-todo');
         checkTodoEl.addEventListener('click', () => {
             newTodo.classList.toggle('completed');
-            filterTodo()
+            filterTodo();
             update();
         })
     }
@@ -42,7 +49,7 @@ function newTodo(newTodoInnerHtml, addClass) {
         let removeTodoEl = newTodo.querySelector('.delete-todo');
         removeTodoEl.addEventListener('click', () => {
             allTodo.splice(allTodo.indexOf(newTodo), 1);
-            filterTodo()
+            filterTodo();
             update();
         })
     }
@@ -86,12 +93,7 @@ function addTodo(e) {
             hideScrollBarTimeout = null;
         }
         hideScrollBarTimeout = setTimeout(hideScrollBar, '1000');
-    }
-}
-
-function running() {
-    while (true) {
-        console.log('Running')
+        
     }
 }
 
@@ -103,7 +105,7 @@ function update() {
     itemCounter.innerHTML = `${activeTodo.length} items left`;  // Update the items left counter
 }
 
-// Set the number of todos that will displayed on screen
+// Set the number of todos that will be displayed on screen
 function todoListMaxLines(lineNumberDesktop, lineNumberMobile) {
     function maxLines(lineNumber) {
         if (todoList.children[1].childElementCount >= lineNumber) {
@@ -160,7 +162,16 @@ for (let i = 0; i < filterLabels.length; i++) {
     filterLabels[i].addEventListener('click', () => setTimeout(update, '10'))
 }
 
+// Drag and Drop
+todoList.children[1].addEventListener('dragover', sortList);
+todoList.children[1].addEventListener('dragenter', (e) => e.preventDefault());
 
-
-
-
+function sortList(e) {
+    e.preventDefault();
+    let dragEl =  todoList.children[1].querySelector('.dragging');
+    let siblings = [...todoList.children[1].querySelectorAll('.todo-item:not(.dragging)')];
+    let nextSibling = siblings.find(sibling => {
+        return e.clientY <= sibling.getBoundingClientRect().top + sibling.offsetHeight / 2;
+    })
+    todoList.children[1].insertBefore(dragEl, nextSibling);
+}
