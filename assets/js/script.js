@@ -101,27 +101,33 @@ function update() {
     todoList.children[1].innerHTML = '';
     filter();
     addToLocalStorage();
-    todoListMaxLines(6, 3);
+    todoListMaxLines(6, 4, 3);
     itemCounter.innerHTML = `${activeTodo.length} items left`;  // Update the items left counter
 }
 
 // Set the number of todos that will be displayed on screen
-function todoListMaxLines(lineNumberDesktop, lineNumberMobile) {
+function todoListMaxLines(lineNumberBig, lineNumberMedium, lineNumberSmall) {
     function maxLines(lineNumber) {
         if (todoList.children[1].childElementCount >= lineNumber) {
-            todoList.style.maxHeight = lineNumber * todoList.children[1].children[0].offsetHeight + 'px';
+            todoList.children[1].style.maxHeight = lineNumber * todoList.children[1].children[0].offsetHeight + 'px';
         } else {
             todoList.style.maxHeight = 'auto';
         }
     }
-    if(body.offsetHeight >= 600) {
-        maxLines(lineNumberDesktop);
-    } else if (body.offsetHeight < 600) {
-        maxLines(lineNumberMobile);
+    if(window.matchMedia("(max-width: 600px)").matches) {
+        if(window.matchMedia("(max-height: 500px)").matches) {
+            maxLines(lineNumberSmall);
+        } else if(window.matchMedia("(max-height: 800px)").matches) {
+            maxLines(lineNumberMedium);
+        } 
+    } else {
+        maxLines(lineNumberBig);
     }
+
 
 }
 
+// Show the list of todos on screen based on the filter that is selected
 function filter() {
     if (inputFilterAll.checked) {
         allTodo.forEach((todo) => todoList.children[1].append(todo));
@@ -163,9 +169,6 @@ for (let i = 0; i < filterLabels.length; i++) {
 }
 
 // Drag and Drop
-todoList.children[1].addEventListener('dragover', sortList);
-todoList.children[1].addEventListener('dragenter', (e) => e.preventDefault());
-
 function sortList(e) {
     e.preventDefault();
     let dragEl =  todoList.children[1].querySelector('.dragging');
@@ -175,3 +178,25 @@ function sortList(e) {
     })
     todoList.children[1].insertBefore(dragEl, nextSibling);
 }
+
+todoList.children[1].addEventListener('dragover', sortList);
+todoList.children[1].addEventListener('dragenter', (e) => e.preventDefault());
+
+// Update the list of todos with the new order
+todoList.children[1].addEventListener('drop', () => {
+    function updateTodoOrder(listType) {
+        listType.length = 0;
+        [...todoList.children[1].children].forEach((todo) => {
+            listType.push(todo);
+        })
+        setTimeout(addToLocalStorage, 100)
+    }
+
+    if (inputFilterAll.checked) {
+        updateTodoOrder(allTodo);
+    } else if (inputFilterActive.checked) {
+        updateTodoOrder(activeTodo);
+    } else if (inputFilterCompleted.checked) {
+        updateTodoOrder(completedTodo);
+    }
+});

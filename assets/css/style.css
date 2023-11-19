@@ -59,6 +59,7 @@ body {
     background-repeat: no-repeat;
     background-color: var(--document-bg-clr);
     font-family: 'Josefin Sans', sans-serif;
+    transition: background-color 500ms;
 }
 
 body.dark-theme {
@@ -290,6 +291,14 @@ body.dark-theme .card-footer {
     opacity: 0.1;
 }
 
+.reorder-list--text {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--card-footer-txt-clr);
+}
+
 /* Hover States */
 @media screen and (min-width: 551px) {
     #todo-list .todo-item:hover input[type="text"] {
@@ -384,6 +393,9 @@ body.dark-theme .card-footer {
 
     #clear-completed {
         border-bottom-right-radius: var(--card-border-radius);
+    }
+    .reorder-list--text {
+        margin-top: 15px;
     }
 }
 
